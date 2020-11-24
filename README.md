@@ -28,9 +28,25 @@ Create namespace `jenkins`
 kubectl --kubeconfig kubeconfig create ns jenkins
 ```
 
-Install Jenkins (/wt persistence)
+Create directory for persistence
 ```
-helm install --kubeconfig kubeconfig -n jenkins jenkins jenkins/jenkins --set persistence.enabled=false
+docker exec k0s-controller mkdir /mnt/jenkins
+docker exec k0s-controller chown 1000:1000 /mnt/jenkins
+```
+
+Apply pv
+```
+kubectl --kubeconfig kubeconfig apply -f templates/PersistentVolume.yaml
+```
+
+Apply pvc
+```
+kubectl --kubeconfig kubeconfig apply -f templates/PersistentVolumeClaim.yaml
+```
+
+Install Jenkins
+```
+helm upgrade --install --kubeconfig kubeconfig -n jenkins jenkins jenkins/jenkins --set persistence.existingClaim=jenkins
 ```
 
 Get the Jenkins URL
