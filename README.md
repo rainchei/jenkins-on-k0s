@@ -46,6 +46,7 @@ kubectl --kubeconfig kubeconfig apply -f templates/PersistentVolumeClaim.yaml
 
 Install Jenkins
 ```
+helm repo add jenkins https://charts.jenkins.io
 helm upgrade --install --kubeconfig kubeconfig -n jenkins jenkins jenkins/jenkins --set persistence.existingClaim=jenkins
 ```
 
