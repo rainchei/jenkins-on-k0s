@@ -1,4 +1,4 @@
-# linc-devops-test
+# jenkins-on-k0s
 Describe steps to create a minimum environment for Jenkins.
 
 ### Prerequisites
